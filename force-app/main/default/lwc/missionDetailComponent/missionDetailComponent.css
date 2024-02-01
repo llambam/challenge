@@ -1,0 +1,39 @@
+.container {
+    margin: auto;
+}
+
+.mission-details-container {
+    border-radius: 0.25rem; /* Matches border radius in the screenshot */
+    background-color: white; /* Matches the background color */
+}
+
+.header-container {
+    border-bottom: 1px solid white; /* Subtle border color for header */
+}
+
+.mission-header, .guild-name {
+    color: black; /* A grey color for text */
+}
+
+.mission-header {
+    font-weight: bold; /* Makes header text bold */
+}
+
+.separator {
+    height: 1px;
+    background-color: #d8dde6; /* Separator color */
+    margin: 1rem 0; /* Spacing above and below the separator */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.deadline-text {
+    color: red;
+}
+
+.hide-button {
+    display: none;
+}

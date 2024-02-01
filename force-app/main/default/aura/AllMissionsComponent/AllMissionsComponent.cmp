@@ -1,0 +1,76 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="AllMissionsController">
+
+    <aura:attribute name="missions" type="List"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="selectedMissionId" type="String"/>
+    <aura:attribute name="failedStatus" type="String"/>
+    <aura:attribute name="inProgressStatus" type="String"/>
+    <aura:attribute name="availableStatus" type="String"/>
+    <aura:attribute name="completedStatus" type="String"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:attribute  name="messageText" type="String" />
+    <lightning:messageChannel type="SampleMessageChannel__c" aura:id="sampleMessageChannel"/>
+
+
+        <div class="slds-scope">
+            <div class="slds-box slds-theme_default slds-container_fluid">
+                <div class="slds-grid slds-m-bottom_medium slds-align-center slds-grid_align-spread">
+                    <div class="slds-grid">
+                        <h1 class="slds-text-heading_medium slds-col ">{!$Label.c.ALL_MISSIONS_HEADER}</h1>
+                        <div class="slds-col slds-shrink-none slds-m-left_xx-small">
+                            <img src="{!$Resource.DIAMOND_ICON}" class="slds-icon"/>
+                        </div>
+                    </div>
+                </div>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                    <thead>
+                        <tr class="slds-line-height_reset custom-table-header">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="{!$Label.c.ALL_MISSIONS_RANK}">{!$Label.c.ALL_MISSIONS_RANK}</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="{!$Label.c.ALL_MISSIONS_MSSION}">{!$Label.c.ALL_MISSIONS_MSSION}</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="{!$Label.c.ALL_MISSIONS_GUILD}">{!$Label.c.ALL_MISSIONS_GUILD}</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="{!$Label.c.ALL_MISSIONS_STATUS}">{!$Label.c.ALL_MISSIONS_STATUS}</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.missions}" var="mission">
+                            <tr class="slds-hint-parent" onclick="{!c.handleMissionClick}" data-mission-id="{!mission.Id}">
+                                <td data-label="{!$Label.c.ALL_MISSIONS_RANK}">
+                                    <div class="slds-truncate rank-cell" title="{!mission.Complexity_Rank__c}">{!mission.Complexity_Rank__c}</div>
+                                </td>
+                                <td data-label="{!$Label.c.ALL_MISSIONS_MSSION}">
+                                    <div class="slds-truncate" title="{!mission.Details__c}">{!mission.Details__c}</div>
+                                </td>
+                                <td data-label="{!$Label.c.ALL_MISSIONS_GUILD}">
+                                    <div class="slds-truncate" title="{!mission.GuildName}">{!mission.GuildName}</div>
+                                </td>
+                                <td data-label="{!$Label.c.ALL_MISSIONS_STATUS}">
+                                    <aura:if isTrue="{!mission.Status__c == v.failedStatus}">
+                                        <span class="status-label failed">{!mission.Status__c}</span>
+                                    </aura:if>
+                                    <aura:if isTrue="{!mission.Status__c == v.inProgressStatus}">
+                                        <span class="status-label in-progress">{!mission.Status__c}</span>
+                                    </aura:if>
+                                    <aura:if isTrue="{!mission.Status__c == v.availableStatus}">
+                                        <span class="status-label available">{!mission.Status__c}</span>
+                                    </aura:if>
+                                    <aura:if isTrue="{!mission.Status__c == v.completedStatus}">
+                                        <span class="status-label completed">{!mission.Status__c}</span>
+                                    </aura:if>
+                                </td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</aura:component>

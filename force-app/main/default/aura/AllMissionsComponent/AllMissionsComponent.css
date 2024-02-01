@@ -1,0 +1,94 @@
+/*.THIS .slds-box {*/
+/*    margin: auto;*/
+/*}*/
+
+.THIS .custom-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+}
+
+/*Header styles*/
+.THIS .slds-text-heading_medium {
+    margin-right: auto;
+    font-weight: bold;
+}
+.THIS .slds-align-middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Rank cell style*/
+.THIS .rank-cell {
+    background-color: black;
+    color: white;
+    border-radius: var(--lwc-borderRadiusMedium);
+    text-align: center;
+    padding: 0.5rem;
+    display: inline-block;
+    width: 2.5rem;
+    margin: auto;
+}
+
+/*Table header styles*/
+.THIS .custom-table thead {
+    background-color: #F3F2F2;
+}
+
+.THIS .custom-table-header th {
+    background-color: transparent;
+    border-bottom: none;
+}
+
+.THIS .custom-table-header th:first-child {
+    border-top-left-radius: 0.25rem;
+}
+
+.THIS .custom-table-header th:last-child {
+    border-top-right-radius: var(--lwc-borderRadiusMedium);
+}
+
+.THIS .custom-table {
+    border: none;
+}
+
+.THIS .custom-table-header th {
+    border-right: none;
+}
+
+.THIS .custom-table-header th .slds-truncate {
+    padding: 0.5rem;
+}
+
+.THIS .custom-table tbody tr:first-child th,
+.THIS .custom-table tbody tr:first-child td {
+    border-top: none;
+}
+
+/*Status column*/
+.THIS .status-label {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--lwc-borderRadiusLarge);
+    color: white;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.THIS .failed {
+    background-color: #C23934;
+}
+
+.THIS .in-progress {
+    background-color: #FFB75D;
+}
+
+.THIS .available {
+    background-color: #4CAF50;
+}
+
+.THIS .completed {
+    background-color: gray;
+}
