@@ -54,16 +54,16 @@
                                     <div class="slds-truncate" title="{!mission.GuildName}">{!mission.GuildName}</div>
                                 </td>
                                 <td data-label="{!$Label.c.ALL_MISSIONS_STATUS}">
-                                    <aura:if isTrue="{!mission.Status__c == v.failedStatus}">
+                                    <aura:if isTrue="{!mission.Status == v.failedStatus}">
                                         <span class="status-label failed">{!mission.Status__c}</span>
                                     </aura:if>
-                                    <aura:if isTrue="{!mission.Status__c == v.inProgressStatus}">
+                                    <aura:if isTrue="{!mission.Status == v.inProgressStatus}">
                                         <span class="status-label in-progress">{!mission.Status__c}</span>
                                     </aura:if>
-                                    <aura:if isTrue="{!mission.Status__c == v.availableStatus}">
+                                    <aura:if isTrue="{!mission.Status == v.availableStatus}">
                                         <span class="status-label available">{!mission.Status__c}</span>
                                     </aura:if>
-                                    <aura:if isTrue="{!mission.Status__c == v.completedStatus}">
+                                    <aura:if isTrue="{!mission.Status == v.completedStatus}">
                                         <span class="status-label completed">{!mission.Status__c}</span>
                                     </aura:if>
                                 </td>

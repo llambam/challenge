@@ -12,9 +12,28 @@ public without sharing class MissionDetailController {
     private static final Integer AVAILABLE_MISSION_OVERLEVEL = 1;
 
     @AuraEnabled
-    public static Superhero_Mission__c getMissionDetails(final String missionId) {
+    public static MissionDetailDTO getMissionDetails(final String missionId) {
         shouldNotBeNull(missionId);
-        return [SELECT Id, Complexity_Rank__c, Deadline__c, Is_Public__c, Reward__c, Subject__c, Details__c FROM Superhero_Mission__c WHERE Id = :missionId LIMIT 1];
+
+        SObjectType superheroMissionSObjectType = Superhero_Mission__c.getSObjectType();
+        Map<String, SObjectField> superheroMissionSObjectFieldsMap = superheroMissionSObjectType.getDescribe().fields.getMap();
+
+        DescribeFieldResult subjectFieldDescribe = superheroMissionSObjectFieldsMap.get('Subject__c').getDescribe();
+        DescribeFieldResult detailsFieldDescribe = superheroMissionSObjectFieldsMap.get('Details__c').getDescribe();
+        DescribeFieldResult rewardFieldDescribe = superheroMissionSObjectFieldsMap.get('Reward__c').getDescribe();
+        DescribeFieldResult deadlineFieldDescribe = superheroMissionSObjectFieldsMap.get('Deadline__c').getDescribe();
+
+        Superhero_Mission__c superheroMissions = [SELECT Id, Complexity_Rank__c, Deadline__c, Is_Public__c, Reward__c, Subject__c, Details__c FROM Superhero_Mission__c WHERE Id = :missionId LIMIT 1];
+        MissionDetailDTO missionDetailDTO = new MissionDetailDTO(
+                subjectFieldDescribe.getLabel(),
+                detailsFieldDescribe.getLabel(),
+                Label.ALL_MISSIONS_RANK,
+                rewardFieldDescribe.getLabel(),
+                deadlineFieldDescribe.getLabel(),
+                superheroMissions
+        );
+
+        return missionDetailDTO;
     }
 
     @AuraEnabled
@@ -80,6 +99,10 @@ public without sharing class MissionDetailController {
         Id currentUserId = UserInfo.getUserId();
         List<Mission_Assignment__c> missionAssignments = [SELECT Name, Status__c, OwnerId, Hero__r.OwnerId, Hero__r.Contact__r.Email, Mission__r.Status__c FROM Mission_Assignment__c WHERE Mission__c = :missionId];
         Superhero_Mission__c superheroMission = [SELECT Status__c FROM Superhero_Mission__c WHERE Id = :missionId];
+
+        System.debug('currentUserId ' + currentUserId);
+        System.debug('missionAssignments ' + missionAssignments);
+        System.debug('superheroMission ' + superheroMission);
         List<String> ownerEmails = new List<String>();
 
         for (Mission_Assignment__c missionAssignment : missionAssignments) {

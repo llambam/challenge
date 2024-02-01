@@ -1,28 +1,22 @@
 .container {
     margin: auto;
-}
-
-.mission-details-container {
-    border-radius: 0.25rem; /* Matches border radius in the screenshot */
-    background-color: white; /* Matches the background color */
-}
-
-.header-container {
-    border-bottom: 1px solid white; /* Subtle border color for header */
+    border-radius: var(--lwc-borderRadiusMedium);
+    background-color: white;
+    position: relative;
 }
 
 .mission-header, .guild-name {
-    color: black; /* A grey color for text */
+    color: black;
 }
 
 .mission-header {
-    font-weight: bold; /* Makes header text bold */
+    font-weight: bold;
 }
 
 .separator {
     height: 1px;
-    background-color: #d8dde6; /* Separator color */
-    margin: 1rem 0; /* Spacing above and below the separator */
+    background-color: #d8dde6;
+    margin: 1rem 0;
 }
 
 .button-container {
@@ -37,3 +31,18 @@
 .hide-button {
     display: none;
 }
+
+.spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.75); /* semi-transparent white background */
+    z-index: 9999; /* Make sure it's on top of other content */
+    display: flex;
+    justify-content: center; /* Center spinner horizontally */
+    align-items: center; /* Center spinner vertically */
+}
+
+

@@ -21,7 +21,15 @@
             const state = response.getState();
             if (state === "SUCCESS") {
                 let data = response.getReturnValue().data;
-                data.forEach(row => row.GuildName = row.Guild__r.Name)
+                data.forEach(row => {
+                    row.GuildName = row.Guild__r.Name
+                    if (row.hasOwnProperty('Mission_Assignments__r')) {
+                        row.Status = row.Mission_Assignments__r[0].Status__c
+                    } else {
+                        row.Status = row.Status__c;
+                    }
+                })
+
                 cmp.set('v.columns', response.getReturnValue().columns);
                 cmp.set("v.missions", data);
             } else {

@@ -2,6 +2,7 @@ public with sharing class SendNewMissionNotificationEmailBatch implements Databa
     private List<Id> guildIds;
     private static final String EMAIL_SUBJECT = 'New Superhero Mission Created';
     private static final String EMAIL_BODY = 'A new superhero mission has been created. Check it out!';
+    private static final String QUERY = 'SELECT Name, Contact__r.Email  FROM Hero__c WHERE Guild__c IN :guildIds';
 
 
     public SendNewMissionNotificationEmailBatch(List<Id> guildIds) {
@@ -9,8 +10,7 @@ public with sharing class SendNewMissionNotificationEmailBatch implements Databa
     }
 
     public Database.QueryLocator start(Database.BatchableContext batchContext) {
-        String query = 'SELECT Name, Contact__r.Email  FROM Hero__c WHERE Guild__c IN :guildIds';
-        return Database.getQueryLocator(query);
+        return Database.getQueryLocator(QUERY);
     }
 
     public void execute(Database.BatchableContext BC, List<Hero__c> heroes) {
